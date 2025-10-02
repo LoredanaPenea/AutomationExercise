@@ -1,4 +1,5 @@
-﻿using AutomationExercise.WebHelperMethods;
+﻿using AutomationExercise.Access;
+using AutomationExercise.WebHelperMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -76,10 +77,6 @@ namespace AutomationExercise.Pages
             Assert.AreEqual(expectedName, actualName);
             Assert.AreEqual(expectedEmail, actualEmail);
         }
-        public void SetPassword(string password)
-        {
-            webElementMethods.TypeTextInWebElement(passwordInput,password);
-        } 
 
         public void SelectDOB(string day, string month, string year)
         {
@@ -89,7 +86,14 @@ namespace AutomationExercise.Pages
             new SelectElement(monthsDropdown).SelectByText(newMonth);
             new SelectElement(yearsDropdown).SelectByText(year);
         }
+        public void FillAccountInformationUsingXML(SignUpUserData signUpUserData)
+        {
+            SelectTitle(signUpUserData.Title);
+            VerifyPrefilledUserInfo(signUpUserData.Name, signUpUserData.Email);
+            webElementMethods.TypeTextInWebElement(passwordInput,signUpUserData.Password);
+            //Date of Birth
 
+        }
         public void SubscribeToNewsletter()
         {
             webElementMethods.ClickOnElement(newsletterCheckbox);
@@ -105,7 +109,7 @@ namespace AutomationExercise.Pages
             Console.WriteLine("'Address Information' is visible");
         }
 
-        public void FillAddressInformation(string firstName, string lastName, string company, string address, string country, string state, string city, string zipcode, string mobileNumber)
+     /*   public void FillAddressInformation(string firstName, string lastName, string company, string address, string country, string state, string city, string zipcode, string mobileNumber)
         {
             webElementMethods.FillElement(firstNameInput, firstName);
             webElementMethods.FillElement(lastNameInput,lastName);
@@ -117,11 +121,25 @@ namespace AutomationExercise.Pages
             webElementMethods.FillElement(zipcodeInput, zipcode);
             webElementMethods.FillElement(mobileNumberInput,mobileNumber);
         }
-
+        */
         public void SelectCountry (string country)
         {
             string newCountry = char.ToUpper(country[0]) + country.Substring(1).ToLower();
             webElementMethods.SelectValueFromDropDown(countryDropdown, newCountry);
+        }
+
+        public void FillAddressInformationUsingXML(SignUpUserData signUpUserData)
+        {
+            webElementMethods.FillElement(firstNameInput, signUpUserData.FirstName);
+            webElementMethods.FillElement(lastNameInput, signUpUserData.LastName);
+            webElementMethods.FillElement(companyInput, signUpUserData.Company); 
+            webElementMethods.FillElement(address1Input, signUpUserData.Address);
+            webElementMethods.FillElement(address2Input, signUpUserData.Address2);
+            SelectCountry(signUpUserData.Country);
+            webElementMethods.FillElement(stateInput , signUpUserData.State);
+            webElementMethods.FillElement (cityInput , signUpUserData.City);
+            webElementMethods.FillElement(zipcodeInput , signUpUserData.Zipcode);
+            webElementMethods.FillElement(mobileNumberInput, signUpUserData.MobileNumber);
         }
 
         public void ClickCreateAccount()

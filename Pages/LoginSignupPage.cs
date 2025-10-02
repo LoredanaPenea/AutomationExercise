@@ -1,4 +1,5 @@
-﻿using AutomationExercise.WebHelperMethods;
+﻿using AutomationExercise.Access;
+using AutomationExercise.WebHelperMethods;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -47,15 +48,16 @@ namespace AutomationExercise.Pages
         {
             webElementMethods.FillElement(signupEmailInput, email);
         } 
+
+        public void EnterSignUpDataFromXML(SignUpData signupData)
+        {
+            webElementMethods.FillElement(nameInput, signupData.Name);
+            webElementMethods.FillElement(signupEmailInput, signupData.EmailAddress);
+        }
         public void ClickSignupBtn() 
         {
             webElementMethods.ClickOnElement(signupButton);
         }
-
-        /* public string GenerateRandomEmail()
-         {
-             throw new NotImplementedException();
-         } */
 
         public void verifyLoginTitle()
         {
@@ -70,7 +72,12 @@ namespace AutomationExercise.Pages
         public void EnterLoginPassword(string password)
         {
             webElementMethods.FillElement(passwordInput, password);
-        } 
+        }
+     /*   public void EnterLoginDataFromXML(LoginData loginData)
+        {
+            webElementMethods.FillElement();
+            webElementMethods.FillElement();
+        } */
         public void ClickLoginBtn() => loginButton.Click();
     }
 }

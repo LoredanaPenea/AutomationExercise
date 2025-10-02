@@ -14,7 +14,8 @@ namespace AutomationExercise.Browser
         public object BrowserOptions()
         {
             EdgeOptions edgeOptions = new EdgeOptions();
-            edgeOptions.AddArgument("--window-size=1920,1080");
+           // edgeOptions.AddArgument("--window-size=1920,1080");
+            edgeOptions.AddArgument("start-maximized");
             edgeOptions.AddArgument("--disable-gpu");
             edgeOptions.AddArgument("--no-sandbox");
             return edgeOptions;
