@@ -49,6 +49,8 @@ namespace AutomationExercise.Pages
         // IWebElement contactUsXPath => webDriver.FindElement(By.XPath("//a[@href='/contact_us']"));
         IWebElement consentPopup => webDriver.FindElement(By.CssSelector("div.fc-dialog-scrollable-content"));
         IWebElement consentButton => webDriver.FindElement(By.XPath("//button[@aria-label='Consent']"));
+        IWebElement logo => webDriver.FindElement(By.CssSelector("img[alt='Website for automation practice']"));
+        
         public void AcceptConsent()
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(10));
@@ -66,6 +68,12 @@ namespace AutomationExercise.Pages
             {
                 return false;
             }
+        }
+        public void VerifyHomePageIsVisible()
+        {
+            if (logo.Displayed)
+                Console.WriteLine("✅ Home page is visible: Logo is displayed.");
+            Assert.IsTrue(logo.Displayed, "Home page logo is not visible. Home page may not have loaded correctly.");
         }
         public void ClickOnHomeItem()
         {
@@ -87,5 +95,6 @@ namespace AutomationExercise.Pages
         {
             webElementMethods.ClickOnElement(signupLoginItem);
         }
+
     }
 }

@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,6 @@ namespace AutomationExercise.Pages
         IWebElement specialOffersCheckbox => webDriver.FindElement(By.Id("optin"));
 
         IWebElement addressInformationHeading => webDriver.FindElement(By.XPath("//h2//b[text()='Address Information']"));
-
         IWebElement firstNameInput => webDriver.FindElement(By.CssSelector("input[data-qa='first_name']"));
         IWebElement lastNameInput => webDriver.FindElement(By.CssSelector("input[data-qa='last_name']"));
         IWebElement companyInput => webDriver.FindElement(By.Id("company"));
@@ -86,42 +86,54 @@ namespace AutomationExercise.Pages
             new SelectElement(monthsDropdown).SelectByText(newMonth);
             new SelectElement(yearsDropdown).SelectByText(year);
         }
+
+        public void SelectDOB(DateTime dob)
+        {
+            SelectDOB(
+                dob.Day.ToString(),
+                dob.ToString("MMMM"),
+                dob.Year.ToString()
+            );
+        }
+        //if DateOfBirth is string
+        public void ParseAndSelectDateOfBirth(string dateString)
+        {
+            var parseDate = new DateParserMethod();
+            var (day, month, year) = parseDate.Parse(dateString);
+            SelectDOB(day, month, year);
+        } 
         public void FillAccountInformationUsingXML(SignUpUserData signUpUserData)
         {
             SelectTitle(signUpUserData.Title);
             VerifyPrefilledUserInfo(signUpUserData.Name, signUpUserData.Email);
             webElementMethods.TypeTextInWebElement(passwordInput,signUpUserData.Password);
             //Date of Birth
-
+            SelectDOB(signUpUserData.DateOfBirth);
+            SetCheckboxes(signUpUserData.SubscribeToNewsletter, signUpUserData.ReceiveSpecialOffers);
         }
-        public void SubscribeToNewsletter()
+      /*  public void SubscribeToNewsletter()
         {
             webElementMethods.ClickOnElement(newsletterCheckbox);
         }
         public void SubscribeToSpecialOffers()
         {
             webElementMethods.ClickOnElement(specialOffersCheckbox);
-        }
+        }*/
 
+        public void SetCheckboxes(bool subscribeToNewsletter, bool receiveSpecialOffers)
+        {
+            if (subscribeToNewsletter && !newsletterCheckbox.Selected)
+                webElementMethods.ClickOnElement(newsletterCheckbox);
+
+            if (receiveSpecialOffers && !specialOffersCheckbox.Selected)
+                webElementMethods.ClickOnElement(specialOffersCheckbox);
+        }
         public void VerifyAdressInformationHeading()
         {
             Assert.IsTrue(addressInformationHeading.Displayed);
             Console.WriteLine("'Address Information' is visible");
         }
 
-     /*   public void FillAddressInformation(string firstName, string lastName, string company, string address, string country, string state, string city, string zipcode, string mobileNumber)
-        {
-            webElementMethods.FillElement(firstNameInput, firstName);
-            webElementMethods.FillElement(lastNameInput,lastName);
-            webElementMethods.FillElement(companyInput,company);
-            webElementMethods.FillElement(address1Input,address);
-            SelectCountry(country);
-            webElementMethods.FillElement(stateInput, state);
-            webElementMethods.FillElement(cityInput, city);
-            webElementMethods.FillElement(zipcodeInput, zipcode);
-            webElementMethods.FillElement(mobileNumberInput,mobileNumber);
-        }
-        */
         public void SelectCountry (string country)
         {
             string newCountry = char.ToUpper(country[0]) + country.Substring(1).ToLower();
@@ -141,7 +153,6 @@ namespace AutomationExercise.Pages
             webElementMethods.FillElement(zipcodeInput , signUpUserData.Zipcode);
             webElementMethods.FillElement(mobileNumberInput, signUpUserData.MobileNumber);
         }
-
         public void ClickCreateAccount()
         {
             webElementMethods.ClickOnElement(createAccountButton);

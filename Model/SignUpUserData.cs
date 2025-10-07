@@ -14,8 +14,8 @@ namespace AutomationExercise.Access
         public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        // checkbox for newsletter
-        // checkbox for special offers
+        public bool SubscribeToNewsletter { get; set; }
+        public bool ReceiveSpecialOffers { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }    

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using AutomationExercise.WebHelperMethods;
+using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools.V137.Autofill;
 using System;
 using System.Collections.Generic;
@@ -22,20 +23,27 @@ namespace AutomationExercise.Access
             Name = GetValue("Name");
             Email = GetValue("Email");
             Password = GetValue("Password");
-           
-            //date of birth
-            //DateOfBirth = GetValue("DateOfBirth");
-            string DateOfBirthString = GetValue("DateOfBirth");
 
-            if (!string.IsNullOrWhiteSpace(DateOfBirthString) &&
-                 DateTime.TryParseExact(DateOfBirthString, "dd MMM yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
-                DateOfBirth = parsedDate;
-            else
-            {
-                // Optionally handle missing DOB
-                Console.WriteLine("Date of Birth invalid or missing");
-                DateOfBirth = DateTime.Now;
-            }
+           // DateOfBirth = GetValue("DateOfBirth");
+            //date of birth 
+             string DateOfBirthString = GetValue("DateOfBirth");
+              if (!string.IsNullOrWhiteSpace(DateOfBirthString) &&
+                   DateTime.TryParseExact(DateOfBirthString, new[] { "dd MMM yyyy","dd MMMM yyyy","d MMM yyyy", "d MMMM yyyy"}, 
+                   CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                  DateOfBirth = parsedDate;
+              else
+              {
+                  // Optionally handle missing DOB
+                  Console.WriteLine("Date of Birth invalid or missing");
+                  DateOfBirth = DateTime.Now;
+              }
+            // SubscribeToNewsletter = bool.TryParse(GetValue("SubscribeToNewsletter"), out bool subscribe) && subscribe;
+
+            SubscribeToNewsletter = GetBoolValue(GetValue("SubscribeToNewsletter"));
+            ReceiveSpecialOffers = GetBoolValue(GetValue("ReceiveSpecialOffers"));
+
+            //SubscribeToNewsletter = XMLValueParser.GetBoolValue(GetValue("SubscribeToNewsletter"));
+
 
             FirstName = GetValue("FirstName");
             LastName = GetValue("LastName");
@@ -66,6 +74,26 @@ namespace AutomationExercise.Access
             if (dataXMLNode == null)
                 throw new Exception($"Data set {dataSetNumber} not found in XML file");
             //  else Console.WriteLine($"Loaded node: {dataNode}");
+        }
+
+        private bool GetBoolValue(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return false;
+
+            switch (value.Trim().ToLowerInvariant())
+            {
+                case "true":
+                case "yes":
+                case "1":
+                    return true;
+                case "false":
+                case "no":
+                case "0":
+                    return false;
+                default:
+                    throw new FormatException($"Invalid boolean value: {value}");
+            }
         }
     }
 }

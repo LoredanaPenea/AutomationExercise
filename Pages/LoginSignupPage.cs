@@ -39,15 +39,6 @@ namespace AutomationExercise.Pages
             Assert.IsTrue(IsSignupTitleVisible(), "New User Signup!");
             Console.WriteLine("'New User Signup!' is visible");
         }
-        public void EnterSignupName(string name) 
-        {
-            webElementMethods.FillElement(nameInput, name);
-        }
-        
-        public void EnterSignupEmail(string email)
-        {
-            webElementMethods.FillElement(signupEmailInput, email);
-        } 
 
         public void EnterSignUpDataFromXML(SignUpData signupData)
         {
@@ -58,26 +49,17 @@ namespace AutomationExercise.Pages
         {
             webElementMethods.ClickOnElement(signupButton);
         }
-
         public void verifyLoginTitle()
         {
             Assert.IsTrue(IsLoginTitleVisible(), "Login to your account");
-            Console.WriteLine("'Login to ypur account' is visible");
+            Console.WriteLine("'Login to your account' is visible");
         }
-        public void EnterLoginEmail(string email)
+      
+       public void EnterLoginDataFromXML(LoginData loginData)
         {
-            webElementMethods.FillElement(loginEmailInput, email);
-            
+            webElementMethods.FillElement(loginEmailInput, loginData.EmailAddress);
+            webElementMethods.FillElement(passwordInput, loginData.Password);
         } 
-        public void EnterLoginPassword(string password)
-        {
-            webElementMethods.FillElement(passwordInput, password);
-        }
-     /*   public void EnterLoginDataFromXML(LoginData loginData)
-        {
-            webElementMethods.FillElement();
-            webElementMethods.FillElement();
-        } */
         public void ClickLoginBtn() => loginButton.Click();
     }
 }

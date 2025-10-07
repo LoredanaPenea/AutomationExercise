@@ -22,7 +22,6 @@ namespace AutomationExercise.WebHelperMethods
         {
             jsExec.ExecuteScript($"window.scrollTo({pixelX},0)");
         }
-
         public void ScrollPageVertically(int pixelY)
         {
             jsExec.ExecuteScript($"window.scrollTo(0,{pixelY})");

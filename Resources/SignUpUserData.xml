@@ -4,7 +4,9 @@
 		<Name>Andreea</Name>
 		<Email>andreeaavram@test.com</Email>
 		<Password>password1</Password>
-		<DateOfBirth>12 May 1990</DateOfBirth>
+		<DateOfBirth>12 April 1990</DateOfBirth>
+		<SubscribeToNewsletter>true</SubscribeToNewsletter>
+		<ReceiveSpecialOffers>false</ReceiveSpecialOffers>
 		<FirstName>Andreea</FirstName>
 		<LastName>Avram</LastName>
 		<Company>Endava</Company>
@@ -22,6 +24,8 @@
 		<Email>andreeaavram@test.com</Email>
 		<Password></Password>
 		<DateOfBirth>12 May 1990</DateOfBirth>
+		<SubscribeToNewsletter>true</SubscribeToNewsletter>
+		<ReceiveSpecialOffers>true</ReceiveSpecialOffers>
 		<FirstName>Andreea</FirstName>
 		<LastName>Avram</LastName>
 		<Company></Company>

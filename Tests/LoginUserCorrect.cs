@@ -2,7 +2,6 @@
 using AutomationExercise.Browser;
 using AutomationExercise.Pages;
 using AutomationExercise.WebHelperMethods;
-using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,51 +10,37 @@ using System.Threading.Tasks;
 
 namespace AutomationExercise.Tests
 {
-    public class RegisterUserTest : WebHomePage
+    public class LoginUserCorrect : WebHomePage
     {
         WebElementMethods webElementMethods;
         HomePage homePage;
-        LoginSignupPage loginSignUpPage;
-        SignUpPage signUpPage;
-        AccountCreatedPage accountCreatedPage;
+        LoginSignupPage loginSignupPage;
         HomePageLoggedUserPage homePageLoggedUserPage;
         DeleteAccountPage deleteAccountPage;
 
-        [Test]
-        public void RegisterUserTestMethod() 
+        [Test]  
+        public void LoginUserCorrectMethod()
         {
             webElementMethods = new WebElementMethods(driver);
             homePage = new HomePage(driver);
-            loginSignUpPage = new LoginSignupPage(driver);
-            signUpPage = new SignUpPage(driver);
-            accountCreatedPage = new AccountCreatedPage(driver);
+            loginSignupPage = new LoginSignupPage(driver);
             homePageLoggedUserPage = new HomePageLoggedUserPage(driver);
             deleteAccountPage = new DeleteAccountPage(driver);
-            var signupData = new SignUpData(1);
-            var signUpUserData = new SignUpUserData(1);
+            var loginData = new LoginData(1);
 
             homePage.AcceptConsent();
             homePage.VerifyHomePageIsVisible();
             homePage.ClickOnSignupLoginItem();
 
-            loginSignUpPage.VerifySingupTitle();
-            loginSignUpPage.EnterSignUpDataFromXML(signupData);
-            loginSignUpPage.ClickSignupBtn();
-
-            signUpPage.VerifyAccountInformationHeading();
-            signUpPage.FillAccountInformationUsingXML(signUpUserData);
-            signUpPage.FillAddressInformationUsingXML(signUpUserData);
-            signUpPage.ClickCreateAccount();
-
-            accountCreatedPage.VerifyAccountCreatedHeading();
-            accountCreatedPage.ClickContinueBtn();
-
+            loginSignupPage.verifyLoginTitle();
+            loginSignupPage.EnterLoginDataFromXML(loginData);
+            loginSignupPage.ClickLoginBtn();
+           
             homePageLoggedUserPage.VerifyLoggedInAs();
             homePageLoggedUserPage.DeleteAccountBtn();
-            
+
             deleteAccountPage.VerifyAccountDeletedHeading();
             deleteAccountPage.ClickContinueBtn();
-
         }
     }
 }
