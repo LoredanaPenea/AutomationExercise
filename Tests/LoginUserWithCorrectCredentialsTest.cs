@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AutomationExercise.Tests
 {
-    public class LoginUserCorrect : WebHomePage
+    public class LoginUserWithCorrectCredentialsTest : WebHomePage
     {
         WebElementMethods webElementMethods;
         HomePage homePage;
@@ -19,7 +19,7 @@ namespace AutomationExercise.Tests
         DeleteAccountPage deleteAccountPage;
 
         [Test]  
-        public void LoginUserCorrectMethod()
+        public void LoginUserWithCorrectCredentialsMethod()
         {
             webElementMethods = new WebElementMethods(driver);
             homePage = new HomePage(driver);
@@ -32,7 +32,7 @@ namespace AutomationExercise.Tests
             homePage.VerifyHomePageIsVisible();
             homePage.ClickOnSignupLoginItem();
 
-            loginSignupPage.verifyLoginTitle();
+            loginSignupPage.VerifyLoginTitle();
             loginSignupPage.EnterLoginDataFromXML(loginData);
             loginSignupPage.ClickLoginBtn();
            

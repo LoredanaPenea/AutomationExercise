@@ -3,4 +3,8 @@
 		<Name>Andreea</Name>
 		<EmailAddress>andreeaavram@test.com</EmailAddress>
 	</dataSet_1>
+	<dataSet_2>
+		<Name>lore1</Name>
+		<EmailAddress>lore1@test1.com</EmailAddress>
+	</dataSet_2>
 </dataSets>

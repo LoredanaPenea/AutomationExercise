@@ -49,7 +49,7 @@ namespace AutomationExercise.Pages
         {
             webElementMethods.ClickOnElement(signupButton);
         }
-        public void verifyLoginTitle()
+        public void VerifyLoginTitle()
         {
             Assert.IsTrue(IsLoginTitleVisible(), "Login to your account");
             Console.WriteLine("'Login to your account' is visible");
@@ -61,5 +61,25 @@ namespace AutomationExercise.Pages
             webElementMethods.FillElement(passwordInput, loginData.Password);
         } 
         public void ClickLoginBtn() => loginButton.Click();
+
+        public void VerifyIncorrectEmailOrPasswordMessage()
+        {
+            IWebElement incorrectEmailOrPasswordMessage = webDriver.FindElement(By.XPath("//p[text()='Your email or password is incorrect!']"));
+            Assert.IsTrue(incorrectEmailOrPasswordMessage.Displayed);
+            Console.WriteLine("'Your email or password is incorrect!' is visible");
+        }
+
+        public void IsLoginFormVisible()
+        {
+            Assert.IsTrue(webDriver.Url.Contains("/login"), "User was not redirected to login page.");
+
+        }
+
+        public void VerifyEmailAlreadyExistMessage()
+        {
+            IWebElement emailAlreadyExistMessage = webDriver.FindElement(By.XPath("//p[text()='Email Address already exist!']"));
+            Assert.IsTrue(emailAlreadyExistMessage.Displayed);
+            Console.WriteLine("'Email Address already exist!' is visible");
+        }
     }
 }

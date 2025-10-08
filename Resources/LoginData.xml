@@ -1,6 +1,14 @@
 ﻿<dataSets>
 	<dataSet_1>
-		<EmailAddress>lore1@test.com</EmailAddress>
+		<EmailAddress>lore1@test1.com</EmailAddress>
 		<Password>password1</Password>
 	</dataSet_1>
+	<dataSet_2>
+		<EmailAddress>address@mail.com</EmailAddress>
+		<Password>test</Password>
+	</dataSet_2>
+	<dataSet_3>
+		<EmailAddress>address@mail.com</EmailAddress>
+		<Password>test</Password>
+	</dataSet_3>
 </dataSets>

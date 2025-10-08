@@ -53,5 +53,10 @@ namespace AutomationExercise.Pages
         {
             webElementMethods.ClickOnElement(deleteAccountItem);
         }
+
+        public void ClickOnLogoutItem()
+        {
+            webElementMethods.ClickOnElement(logoutItem);
+        }
     }
 }

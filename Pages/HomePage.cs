@@ -45,7 +45,7 @@ namespace AutomationExercise.Pages
         IWebElement videoTutorialsLink => webDriver.FindElement(By.LinkText("Video Tutorials"));
        // IWebElement videoTutorialsCss => webDriver.FindElement(By.CssSelector("a[href*='youtube.com']"));
     
-        IWebElement contactUsLink => webDriver.FindElement(By.LinkText("Contact us"));
+        IWebElement contactUsItem => webDriver.FindElement(By.LinkText("Contact us"));
         // IWebElement contactUsXPath => webDriver.FindElement(By.XPath("//a[@href='/contact_us']"));
         IWebElement consentPopup => webDriver.FindElement(By.CssSelector("div.fc-dialog-scrollable-content"));
         IWebElement consentButton => webDriver.FindElement(By.XPath("//button[@aria-label='Consent']"));
@@ -96,5 +96,9 @@ namespace AutomationExercise.Pages
             webElementMethods.ClickOnElement(signupLoginItem);
         }
 
+        public void ClickOnContactUsItem()
+        {
+            webElementMethods.ClickOnElement(contactUsItem);
+        }
     }
 }

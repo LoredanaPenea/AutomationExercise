@@ -1,0 +1,14 @@
+﻿<dataSets>
+	<dataSet_1>
+		<Name>Loredana</Name>
+		<Email>lore1@test1.com</Email>
+		<Subject>Test2</Subject>
+		<Message>This is a test message. Test Contact Us form</Message>
+	</dataSet_1>
+	<dataSet_2>
+		<Name></Name>
+		<Email>lore1@test1.com</Email>
+		<Subject></Subject>
+		<Message></Message>
+	</dataSet_2>
+</dataSets>
